@@ -1,13 +1,25 @@
 package com.graph;
 
-public interface GraphInterface<T> {
+import com.utils.PrimaryKey;
+
+public interface GraphInterface<U, T extends PrimaryKey<U>> {
 	public void addNode(T element);
 
-	public void addEdge(int start, int end);
+	public void addEdge(U start, U end);
 
-	public T[] getNeighbours(T node);
+	public void removeEdge(U start, U end);
+	
+	public T removeNode(T element);
+	
+	public T getNode(U key);
+	
+	public T[] DFS();
 
 	public T[] DFS(T node);
 
+	public T[] BFS();
+	
+	public T[] BFS(T node);
+	
 	public T[] BFS(T node, int depth);
 }
