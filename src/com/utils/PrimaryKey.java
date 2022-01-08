@@ -1,5 +1,5 @@
 package com.utils;
 
-public interface PrimaryKey {
-	int getKey();
+public interface PrimaryKey<U> {
+	U getKey();
 }

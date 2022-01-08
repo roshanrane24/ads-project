@@ -2,7 +2,12 @@ package com.social_network;
 
 import com.utils.PrimaryKey;
 
-public class User implements PrimaryKey {
+public class User implements PrimaryKey<Integer> {
+	@Override
+	public String toString() {
+		return "User Id : " + uId + "\tName : " + name + "\tGender : " + gender;
+	}
+
 	private static int id;
 	private int uId;
 	private String name;
@@ -35,7 +40,7 @@ public class User implements PrimaryKey {
 	}
 
 	@Override
-	public int getKey() {
+	public Integer getKey() {
 		return uId;
 	}
 	
