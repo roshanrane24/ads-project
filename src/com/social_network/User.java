@@ -1,10 +1,19 @@
 package com.social_network;
 
-public class User {
+import com.utils.PrimaryKey;
+
+public class User implements PrimaryKey {
+	private static int id;
+	private int uId;
 	private String name;
 	private Gender gender;
+	
+	static {
+		User.id = 123;
+	}
 
 	public User(String name, Gender gender) {
+		this.uId = User.id++;
 		this.name = name;
 		this.gender = gender;
 	}
@@ -23,6 +32,11 @@ public class User {
 
 	public void setGender(Gender gender) {
 		this.gender = gender;
+	}
+
+	@Override
+	public int getKey() {
+		return uId;
 	}
 	
 }
