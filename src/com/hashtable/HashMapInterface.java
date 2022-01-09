@@ -1,8 +1,8 @@
 package com.hashtable;
 
-public interface HashMapInterface<T extends Comparable<T>, U> {
-	public void put(T key, U value);
-	public U get(T key);
-	public U remove(T key);
-	public U[] values();
+public interface HashMapInterface<K extends Comparable<K>, V> {
+	public void put(K key, V value);
+	public V get(K key);
+	public V remove(K key);
+	public V[] values();
 }
