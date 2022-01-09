@@ -5,9 +5,11 @@ public interface LinkedListInterface<T> {
 
 	public void add(T element, int i);
 
-	public void get(int i);
+	public T get(int i);
 
 	public T remove(int i);
+
+	public T remove(T element);
 
 	public int size();
 }
