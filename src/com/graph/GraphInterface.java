@@ -2,24 +2,24 @@ package com.graph;
 
 import com.utils.PrimaryKey;
 
-public interface GraphInterface<U, T extends PrimaryKey<U>> {
-	public void addNode(T element);
+public interface GraphInterface<K, V extends PrimaryKey<K>> {
+	public void addNode(V element);
 
-	public void addEdge(U start, U end);
+	public void addEdge(K start, K end);
 
-	public void removeEdge(U start, U end);
+	public void removeEdge(K start, K end);
 	
-	public T removeNode(T element);
+	public V removeNode(V element);
 	
-	public T getNode(U key);
+	public V getNode(K key);
 	
-	public T[] DFS();
+	public V[] DFS();
 
-	public T[] DFS(T node);
+	public V[] DFS(V node);
 
-	public T[] BFS();
+	public V[] BFS();
 	
-	public T[] BFS(T node);
+	public V[] BFS(V node);
 	
-	public T[] BFS(T node, int depth);
+	public V[] BFS(V node, int depth);
 }
