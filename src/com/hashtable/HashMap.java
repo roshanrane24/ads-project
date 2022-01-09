@@ -1,5 +1,6 @@
 package com.hashtable;
 
+
 import com.linked_list.LinkedListInterface;
 
 public class HashMap<T extends Comparable<T>, U> implements HashMapInterface<T, U> {
@@ -26,6 +27,7 @@ public class HashMap<T extends Comparable<T>, U> implements HashMapInterface<T, 
 
 	private LinkedListInterface<Node<T, U>>[] buckets;
 	private int count;
+	private static final int ARRAY_SIZE = 15;
 	
 	public HashMap() {
 		buckets = null; // TODO Setup Linked List instance
@@ -33,7 +35,7 @@ public class HashMap<T extends Comparable<T>, U> implements HashMapInterface<T, 
 	}
 
 	private static int hash(int key) {
-		return key % 10;
+		return key % ARRAY_SIZE;
 	}
 
 	@Override
@@ -46,6 +48,15 @@ public class HashMap<T extends Comparable<T>, U> implements HashMapInterface<T, 
 			buckets[bId] = null; // TODO add instance of linked list
 
 		// insert into LL
+		for (int i = 0; i < buckets[bId].size(); i++) {
+			Node<T , U> temp = buckets[bId].get(i);
+			if (temp.key == key) {
+				temp.data = value;
+				return;
+			}
+		}
+		
+		// insert new data 
 		buckets[bId].add(new Node<T, U>(key, value));
 
 		this.count++;
@@ -106,6 +117,11 @@ public class HashMap<T extends Comparable<T>, U> implements HashMapInterface<T, 
 		}
 
 		return temp;
+	}
+	
+	// get first element in first bucket
+	public U getFirst() {
+		return buckets[0].get(0).data;
 	}
 
 }
