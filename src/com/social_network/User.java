@@ -14,7 +14,7 @@ public class User implements PrimaryKey<Integer> {
 	private Gender gender;
 	
 	static {
-		User.id = 123;
+		User.id = 1;
 	}
 
 	public User(String name, Gender gender) {
