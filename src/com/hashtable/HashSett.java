@@ -1,5 +1,6 @@
 package com.hashtable;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import com.linked_list.LinkedListt;
@@ -12,6 +13,10 @@ public class HashSett<T> implements HashSetInterface<T> {
 
 	public HashSett() {
 		holder = new ArrayList<>(15);
+		
+		for (int i = 0; i < 15; i++) {
+			holder.add(null);
+		}
 	}
 
 	@Override
@@ -23,7 +28,7 @@ public class HashSett<T> implements HashSetInterface<T> {
 		ll = holder.get(bucketId);
 		if (ll != null) {
 			current = ll.getHead();
-			while (ll.getHead() != null) {
+			while (current != null) {
 				if (current.getData().hashCode() == element.hashCode()) {
 					System.out.println("Duplicate entries detected");
 					return;
@@ -33,8 +38,8 @@ public class HashSett<T> implements HashSetInterface<T> {
 			ll.add(element);
 			size++;
 		} else {
-			ll = new LinkedListt<>();
-			ll.add(element);
+			holder.add(bucketId, new LinkedListt<>());
+			holder.get(bucketId).add(element);
 			size++;
 		}
 
@@ -54,7 +59,18 @@ public class HashSett<T> implements HashSetInterface<T> {
 
 	@Override
 	public boolean contains(T element) {
-		// TODO Auto-generated method stub
+		int count;
+		
+		for (LinkedListt<T> ll : holder) {
+			if (ll != null) {
+				count = ll.getCount();
+				for (int i = 0; i < count; i++) {
+					if (ll.get(i).equals(element))
+						return true;
+				}
+			}
+		}
+		
 		return false;
 	}
 
@@ -71,8 +87,10 @@ public class HashSett<T> implements HashSetInterface<T> {
 				}
 			}
 		}
+		
+		T[] result = (T[]) Array.newInstance(tempArray.get(0).getClass(), tempArray.size());
 
-		return (T[]) tempArray.toArray();
+		return tempArray.toArray(result);
 	}
 
 	@Override
