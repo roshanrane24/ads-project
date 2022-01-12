@@ -1,13 +1,15 @@
 package com.social_network;
 
+import com.graph.Graph;
 import com.graph.GraphInterface;
 import com.hashtable.HashSetInterface;
+import com.hashtable.HashSett;
 
 public class SocialNetwork {
 	private GraphInterface<Integer, User> graph;
 
 	public SocialNetwork() {
-		this.graph = null;
+		this.graph = new Graph<>();
 	}
 
 	// add a user in network
@@ -29,7 +31,7 @@ public class SocialNetwork {
 
 	// show all users in network
 	public void listUsers() {
-		displayUsers(graph.BFS());
+		displayUsers(((Graph<Integer, User>) graph).getVertexlist());
 	}
 
 	// get a user by Id
@@ -50,7 +52,7 @@ public class SocialNetwork {
 	// Display all connections of user
 	public void showConnection(User user) {
 		// get connections of user
-		User[] u = graph.BFS(user, 1);
+		User[] u = graph.BFS(user, 2);
 		u = removeUserFromArray(u, new User[] { user });
 
 		System.out.println("Connection of User " + user.getName() + " :");
@@ -60,11 +62,11 @@ public class SocialNetwork {
 	// Display all mutual connections of users
 	public void showMutualConnection(User user1, User user2) {
 		// get connections of user 1
-		User[] u1 = graph.BFS(user1, 1);
+		User[] u1 = graph.BFS(user1, 2);
 		u1 = removeUserFromArray(u1, new User[] { user1 });
 
 		// get connections of user 2
-		User[] u2 = graph.BFS(user2, 1);
+		User[] u2 = graph.BFS(user2, 2);
 		u2 = removeUserFromArray(u2, new User[] { user2 });
 
 		User[] ux = findCommonUsers(u1, u2);
@@ -74,58 +76,65 @@ public class SocialNetwork {
 	}
 
 	// Suggest new possible connections for user
-	public User[] suggestConnections(User user) {
-		User[] userConnections = graph.BFS(user, 1);
-		// TODO Initialize Set
-		HashSetInterface<User> userSet = null;
-		
+	public void suggestConnections(User user) {
+		User[] userConnections = graph.BFS(user, 2);
+		HashSetInterface<User> userSet = new HashSett<>();
+
 		// add connection of connection
-		User[] userRecommendations = graph.BFS(user, 2);
-		for (User u: userRecommendations) {
+		User[] userRecommendations = graph.BFS(user, 3);
+		for (User u : userRecommendations) {
 			userSet.add(u);
 		}
-		
+
 		// user which are not current connection of users
-		return removeUserFromArray(userSet.values(), userConnections);
+		displayUsers(removeUserFromArray(userSet.values(), userConnections));
 	}
 
 	// diplay user list
 	private void displayUsers(User[] u) {
+		if (u == null)
+			return;
+
 		for (User user : u) {
 			System.out.println(user);
 		}
 	}
 
 	private User[] findCommonUsers(User[] u1, User[] u2) {
-		// TODO Initialize Set
-		HashSetInterface<User> userSet = null;
-		
+		HashSetInterface<User> userSet = new HashSett<>();
+		HashSetInterface<User> resultSet = new HashSett<>();
+
 		// Add user from both array into set
 		for (User user : u1) {
 			userSet.add(user);
 		}
 
-		for (User user : u1) {
-			userSet.add(user);
+		for (User user : u2) {
+			if (userSet.contains(user))
+				resultSet.add(user);
 		}
-		
-		return userSet.values();
+
+		return resultSet.values();
 	}
 
 	// remove user from user array
 	private User[] removeUserFromArray(User[] fromArray, User[] userArray) {
 		User[] u = new User[fromArray.length - userArray.length];
+		if (u.length < 1)
+			return null;
+
 		int count = 0;
 
 		for (int i = 0; i < fromArray.length; i++) {
-			for (int j = 0; j < userArray.length; j++) {
+			for (int j = 0; j < userArray.length && i < fromArray.length; j++) {
 				// if in user array try next element
 				if (fromArray[i].equals(userArray[j])) {
 					i++;
 					j = 0;
 				}
 			}
-			u[count++] = fromArray[i];
+			if (i < fromArray.length)
+				u[count++] = fromArray[i];
 		}
 
 		return u;

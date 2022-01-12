@@ -17,6 +17,8 @@ public class RunSocialNetwork {
 		boolean exit = false;
 
 		try (Scanner sc = new Scanner(System.in)) {
+			// test graph
+			populateNetwork(network);
 
 			while (!exit) {
 				try {
@@ -81,7 +83,7 @@ public class RunSocialNetwork {
 					case 7:
 						// get user id for users
 						System.out.println("Enter user id of two users : ");
-						
+
 						// if both user exist display mutual connection
 						listMutualConnectionOfUsers(sc.nextInt(), sc.nextInt(), network);
 						break;
@@ -101,7 +103,8 @@ public class RunSocialNetwork {
 						break;
 					}
 				} catch (Exception e) {
-					System.err.println(e.getMessage());
+					e.printStackTrace();
+//					System.err.println(e.getMessage());
 				}
 				sc.nextLine();
 
