@@ -5,4 +5,6 @@ public interface HashMapInterface<K extends Comparable<K>, V> {
 	public V get(K key);
 	public V remove(K key);
 	public V[] values();
+	public K[] keys();
+	public int size();
 }
