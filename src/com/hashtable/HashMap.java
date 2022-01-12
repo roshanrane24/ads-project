@@ -1,7 +1,9 @@
 package com.hashtable;
 
+import java.lang.reflect.Array;
 
 import com.linked_list.LinkedListInterface;
+import com.linked_list.LinkedListt;
 
 public class HashMap<T extends Comparable<T>, U> implements HashMapInterface<T, U> {
 
@@ -28,9 +30,10 @@ public class HashMap<T extends Comparable<T>, U> implements HashMapInterface<T, 
 	private LinkedListInterface<Node<T, U>>[] buckets;
 	private int count;
 	private static final int ARRAY_SIZE = 15;
-	
+
+	@SuppressWarnings("unchecked")
 	public HashMap() {
-		buckets = null; // TODO Setup Linked List instance
+		buckets = (LinkedListt<Node<T, U>>[]) Array.newInstance(LinkedListt.class, ARRAY_SIZE);
 		count = 0;
 	}
 
@@ -45,18 +48,18 @@ public class HashMap<T extends Comparable<T>, U> implements HashMapInterface<T, 
 
 		// create LL if not exist
 		if (buckets[bId] == null)
-			buckets[bId] = null; // TODO add instance of linked list
+			buckets[bId] = new LinkedListt<>();
 
 		// insert into LL
 		for (int i = 0; i < buckets[bId].size(); i++) {
-			Node<T , U> temp = buckets[bId].get(i);
+			Node<T, U> temp = buckets[bId].get(i);
 			if (temp.key == key) {
 				temp.data = value;
 				return;
 			}
 		}
-		
-		// insert new data 
+
+		// insert new data
 		buckets[bId].add(new Node<T, U>(key, value));
 
 		this.count++;
@@ -86,7 +89,7 @@ public class HashMap<T extends Comparable<T>, U> implements HashMapInterface<T, 
 		// get bucket id
 		int bId = hash(key.hashCode());
 
-		// create bst if not exist
+		// if not exist
 		if (buckets[bId] == null)
 			return null;
 
@@ -101,15 +104,17 @@ public class HashMap<T extends Comparable<T>, U> implements HashMapInterface<T, 
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public U[] values() {
 		// create a temporary data array
-		@SuppressWarnings("unchecked")
-		U[] temp = (U[]) new Object[this.count];
+		U[] temp = null;
 		int index = 0;
 
 		for (LinkedListInterface<Node<T, U>> u : buckets) {
 			if (u != null) {
+				if (temp == null)
+					temp = (U[]) Array.newInstance(u.get(0).data.getClass(), this.count);
 				for (int i = 0; i < u.size(); i++) {
 					temp[index++] = u.get(i).data;
 				}
@@ -118,10 +123,48 @@ public class HashMap<T extends Comparable<T>, U> implements HashMapInterface<T, 
 
 		return temp;
 	}
-	
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public T[] keys() {
+		// create a temporary data array
+		T[] temp = null;
+		int index = 0;
+
+		for (LinkedListInterface<Node<T, U>> u : buckets) {
+			if (u != null) {
+				if (temp == null)
+					temp = (T[]) Array.newInstance(u.get(0).key.getClass(), this.count);
+				for (int i = 0; i < u.size(); i++) {
+					temp[index++] = u.get(i).key;
+				}
+			}
+		}
+
+		return temp;
+	}
+
 	// get first element in first bucket
 	public U getFirst() {
-		return buckets[0].get(0).data;
+		U user = null;
+		
+		for (int i = 0; i < buckets.length; i++) {
+			if (buckets[i] != null) {
+				U temp = buckets[i].get(0).data;
+				
+				if (temp != null) {
+					user = temp;
+					break;
+				}
+			}
+		}
+		
+		return user;
+	}
+
+	@Override
+	public int size() {
+		return this.count;
 	}
 
 }
