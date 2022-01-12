@@ -17,6 +17,7 @@ public class RunSocialNetwork {
 		boolean exit = false;
 
 		try (Scanner sc = new Scanner(System.in)) {
+
 			// test graph
 			populateNetwork(network);
 
@@ -103,8 +104,7 @@ public class RunSocialNetwork {
 						break;
 					}
 				} catch (Exception e) {
-					e.printStackTrace();
-//					System.err.println(e.getMessage());
+					System.err.println(e.getMessage());
 				}
 				sc.nextLine();
 

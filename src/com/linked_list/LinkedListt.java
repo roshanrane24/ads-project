@@ -60,12 +60,6 @@ public class LinkedListt<T> implements LinkedListInterface<T> {
 		return null;
 	}
 
-//	@Override
-//	public T remove(int i) {
-//		return null;
-//
-//	}
-
 	@Override
 	public int size() {
 		return size;
@@ -92,7 +86,7 @@ public class LinkedListt<T> implements LinkedListInterface<T> {
 			System.out.println("Element not found or List Empty");
 			return null;
 		}
-		
+
 		size--;
 
 		if (currentNode == head) {
@@ -104,13 +98,13 @@ public class LinkedListt<T> implements LinkedListInterface<T> {
 			this.head = this.head.getNext();
 			return currentNode.getData();
 		}
-		
-		if  (currentNode == this.tail) {
+
+		if (currentNode == this.tail) {
 			this.tail = previousNode;
 			this.tail.setNext(null);
 			return currentNode.getData();
 		}
-		
+
 		previousNode.setNext(currentNode.getNext());
 		return currentNode.getData();
 	}

@@ -120,6 +120,7 @@ public class SocialNetworkUtils {
 	}
 
 	public static void populateNetwork(SocialNetwork network) throws Exception {
+		// Addding 26 new users
 		addAUserToNetwork("Mona", "F", network);
 		addAUserToNetwork("Scott", "M", network);
 		addAUserToNetwork("Jimmy", "M", network);
@@ -147,7 +148,8 @@ public class SocialNetworkUtils {
 		addAUserToNetwork("Hannah", "F", network);
 		addAUserToNetwork("Jake", "M", network);
 		addAUserToNetwork("Clifton", "M", network);
-		
+
+		// 61 connections between 26 Users
 		connectTwoUsers(8, 2, network);
 		connectTwoUsers(4, 14, network);
 		connectTwoUsers(25, 20, network);
