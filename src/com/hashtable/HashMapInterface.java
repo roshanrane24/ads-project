@@ -1,10 +1,15 @@
 package com.hashtable;
 
 public interface HashMapInterface<K extends Comparable<K>, V> {
-	public void put(K key, V value);
-	public V get(K key);
-	public V remove(K key);
-	public V[] values();
-	public K[] keys();
-	public int size();
+	void put(K key, V value);
+
+	V get(K key);
+
+	V remove(K key);
+
+	V[] values();
+
+	K[] keys();
+
+	int size();
 }

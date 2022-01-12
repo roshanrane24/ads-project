@@ -9,11 +9,11 @@ import org.junit.jupiter.api.Test;
 
 class HashMapTest {
 	static HashMap<String, Integer> hm;
-	
+
 	@BeforeEach
 	void setUp() {
 		hm = new HashMap<>();
-		
+
 		hm.put("One", 1);
 		hm.put("Two", 2);
 		hm.put("Three", 3);
@@ -30,13 +30,13 @@ class HashMapTest {
 	@Test
 	void test2() {
 		hm.put("Ten", 10);
-		
+
 		assertEquals(10, hm.get("Ten"));
 	}
 
 	@Test
 	void test3() {
-		
+
 		assertEquals(4, hm.remove("Four"));
 		assertEquals(null, hm.remove("Four"));
 	}
@@ -45,7 +45,7 @@ class HashMapTest {
 	void test4() {
 		Integer[] v = hm.values();
 		Arrays.sort(v);
-		assertArrayEquals(new Integer[] {1, 2, 3, 4, 5, 6}, v);
+		assertArrayEquals(new Integer[] { 1, 2, 3, 4, 5, 6 }, v);
 	}
 
 	@Test
@@ -53,6 +53,6 @@ class HashMapTest {
 		hm.remove("Four");
 		Integer[] v = hm.values();
 		Arrays.sort(v);
-		assertArrayEquals(new Integer[] {1, 2, 3, 5, 6}, v);
+		assertArrayEquals(new Integer[] { 1, 2, 3, 5, 6 }, v);
 	}
 }

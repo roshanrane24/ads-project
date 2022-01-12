@@ -12,7 +12,7 @@ public class User implements PrimaryKey<Integer> {
 	private int uId;
 	private String name;
 	private Gender gender;
-	
+
 	static {
 		User.id = 1;
 	}
@@ -43,5 +43,5 @@ public class User implements PrimaryKey<Integer> {
 	public Integer getKey() {
 		return uId;
 	}
-	
+
 }

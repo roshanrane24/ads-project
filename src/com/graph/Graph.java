@@ -3,6 +3,8 @@
  */
 package com.graph;
 
+import static com.utils.CommonUtils.squashArray;
+
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -13,8 +15,6 @@ import com.hashtable.HashMapInterface;
 import com.hashtable.HashSetInterface;
 import com.hashtable.HashSett;
 import com.utils.PrimaryKey;
-
-import static com.utils.CommonUtils.*;
 
 public class Graph<K extends Comparable<K>, V extends PrimaryKey<K>> implements GraphInterface<K, V> {
 
@@ -106,7 +106,7 @@ public class Graph<K extends Comparable<K>, V extends PrimaryKey<K>> implements 
 
 		// remove neighbors connection
 		for (Object k : neighbors) {
-			edgeList.get((K)k).remove(key);
+			edgeList.get((K) k).remove(key);
 		}
 
 		return element;
@@ -118,24 +118,12 @@ public class Graph<K extends Comparable<K>, V extends PrimaryKey<K>> implements 
 	}
 
 	@Override
-	public V[] DFS() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public V[] DFS(V node) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public V[] BFS() {
 		V node = ((HashMap<K, V>) vertexlist).getFirst();
-		
+
 		if (node == null)
 			return null;
-		
+
 		return BFS(node, -2);
 	}
 
@@ -158,7 +146,7 @@ public class Graph<K extends Comparable<K>, V extends PrimaryKey<K>> implements 
 		for (int i = 0; i < keys.length; i++) {
 			isVisited.put(keys[i], false);
 		}
-		
+
 		result = (V[]) Array.newInstance(vertexlist.get(keys[0]).getClass(), vertexlist.size());
 
 		// create & add node to queue
@@ -182,21 +170,20 @@ public class Graph<K extends Comparable<K>, V extends PrimaryKey<K>> implements 
 				if (!isVisited.get(current)) {
 					// mark current visited
 					isVisited.put(current, true);
-					
+
 					// process node
 					result[count++] = vertexlist.get(current);
-					
+
 					// get next edges
 					HashSetInterface<K> edgeSet = edgeList.get(current);
-					
-					
+
 					if (edgeSet != null) {
 						Object[] edges = edgeSet.values();
 						Arrays.sort(edges);
 						for (int i = 0; i < edges.length; i++) {
 							if (!isVisited.get((K) edges[i]))
 								queue.add((K) edges[i]);
-						} 
+						}
 					}
 				}
 
@@ -211,7 +198,7 @@ public class Graph<K extends Comparable<K>, V extends PrimaryKey<K>> implements 
 		}
 		return squashArray(result, vertexlist.get(keys[0]).getClass());
 	}
-	
+
 	public V[] getVertexlist() {
 		return vertexlist.values();
 	}

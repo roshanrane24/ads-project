@@ -13,7 +13,7 @@ public class HashSett<T> implements HashSetInterface<T> {
 
 	public HashSett() {
 		holder = new ArrayList<>(15);
-		
+
 		for (int i = 0; i < 15; i++) {
 			holder.add(null);
 		}
@@ -60,7 +60,7 @@ public class HashSett<T> implements HashSetInterface<T> {
 	@Override
 	public boolean contains(T element) {
 		int count;
-		
+
 		for (LinkedListt<T> ll : holder) {
 			if (ll != null) {
 				count = ll.getCount();
@@ -70,7 +70,7 @@ public class HashSett<T> implements HashSetInterface<T> {
 				}
 			}
 		}
-		
+
 		return false;
 	}
 
@@ -87,7 +87,7 @@ public class HashSett<T> implements HashSetInterface<T> {
 				}
 			}
 		}
-		
+
 		T[] result = (T[]) Array.newInstance(tempArray.get(0).getClass(), tempArray.size());
 
 		return tempArray.toArray(result);
@@ -95,7 +95,6 @@ public class HashSett<T> implements HashSetInterface<T> {
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
 		return size;
 	}
 

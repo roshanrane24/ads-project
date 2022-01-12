@@ -7,7 +7,6 @@ public interface LinkedListInterface<T> {
 
 	public T get(int i);
 
-
 	public T remove(T element);
 
 	public int size();

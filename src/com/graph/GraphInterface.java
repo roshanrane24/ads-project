@@ -13,10 +13,6 @@ public interface GraphInterface<K, V extends PrimaryKey<K>> {
 	
 	public V getNode(K key);
 	
-	public V[] DFS();
-
-	public V[] DFS(V node);
-
 	public V[] BFS();
 	
 	public V[] BFS(V node);
