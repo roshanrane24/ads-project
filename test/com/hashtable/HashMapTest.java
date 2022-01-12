@@ -44,7 +44,7 @@ class HashMapTest {
 	@Test
 	void test4() {
 		Integer[] v = hm.values();
-		Arrays.sort(hm.values());
+		Arrays.sort(v);
 		assertArrayEquals(new Integer[] {1, 2, 3, 4, 5, 6}, v);
 	}
 
@@ -52,7 +52,7 @@ class HashMapTest {
 	void test5() {
 		hm.remove("Four");
 		Integer[] v = hm.values();
-		Arrays.sort(hm.values());
+		Arrays.sort(v);
 		assertArrayEquals(new Integer[] {1, 2, 3, 5, 6}, v);
 	}
 }
