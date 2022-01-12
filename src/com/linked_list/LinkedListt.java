@@ -29,14 +29,12 @@ public class LinkedListt<T> implements LinkedListInterface<T> {
 	@Override
 	public void add(T element) {
 		SinglyLinkedListNode<T> newNode = new SinglyLinkedListNode<>(element);
-		SinglyLinkedListNode<T> next;
 		if (head == null) {
 			head = newNode;
 			tail = newNode;
 		} else {
-			next = head;
-			newNode.setNext(next);
-			head = newNode;
+			newNode.setNext(this.head);
+			this.head = newNode;
 		}
 		size++;
 	}
@@ -48,17 +46,14 @@ public class LinkedListt<T> implements LinkedListInterface<T> {
 
 	@Override
 	public T get(int i) {
-
 		int count = 0;
 		SinglyLinkedListNode<T> current;
-		SinglyLinkedListNode<T> next = head.getNext();
 		current = head;
 		while (current != null) {
 			if (count == i)
 				break;
 			count++;
-			next = current.getNext();
-			current = next;
+			current = current.getNext();
 		}
 		if (current != null)
 			return current.getData();
@@ -81,33 +76,43 @@ public class LinkedListt<T> implements LinkedListInterface<T> {
 
 		SinglyLinkedListNode<T> currentNode;
 		SinglyLinkedListNode<T> previousNode;
+
 		currentNode = head;
 		previousNode = null;
-		SinglyLinkedListNode<T> next = head.getNext();
+
 		while (currentNode != null) {
 
 			if (currentNode.getData().equals(element))
 				break;
 			previousNode = currentNode;
-			next = currentNode.getNext();
-			currentNode = next;
+			currentNode = currentNode.getNext();
 		}
+
 		if (currentNode == null) {
 			System.out.println("Element not found or List Empty");
 			return null;
 		}
+		
+		size--;
+
 		if (currentNode == head) {
-			head = next;
-			currentNode.setNext(null);
+			if (this.head == this.tail) {
+				this.head = null;
+				this.tail = null;
+				return currentNode.getData();
+			}
+			this.head = this.head.getNext();
 			return currentNode.getData();
 		}
-		if (currentNode.getData().equals(element)) {
-			previousNode.setNext(currentNode.getNext());
-			currentNode.setNext(null);
+		
+		if  (currentNode == this.tail) {
+			this.tail = previousNode;
+			this.tail.setNext(null);
 			return currentNode.getData();
 		}
-		System.out.println("ElementNotFound");
-		return null;
+		
+		previousNode.setNext(currentNode.getNext());
+		return currentNode.getData();
 	}
 
 	public int getCount() {
