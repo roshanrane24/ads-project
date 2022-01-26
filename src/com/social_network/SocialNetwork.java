@@ -1,11 +1,14 @@
 package com.social_network;
 
+import java.io.Serializable;
+
 import com.graph.Graph;
 import com.graph.GraphInterface;
 import com.hashtable.HashSetInterface;
 import com.hashtable.HashSett;
 
-public class SocialNetwork {
+@SuppressWarnings("serial")
+public class SocialNetwork implements Serializable {
 	private GraphInterface<Integer, User> graph;
 
 	public SocialNetwork() {

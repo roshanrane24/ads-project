@@ -1,6 +1,9 @@
 package com.linked_list;
 
-public class SinglyLinkedListNode<T> {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class SinglyLinkedListNode<T> implements Serializable {
 	private T data;
 	private SinglyLinkedListNode<T> next;
 

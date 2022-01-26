@@ -1,6 +1,9 @@
 package com.linked_list;
 
-public class LinkedListt<T> implements LinkedListInterface<T> {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class LinkedListt<T> implements LinkedListInterface<T>, Serializable {
 	private SinglyLinkedListNode<T> head, tail;
 	private int size;
 

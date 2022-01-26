@@ -1,8 +1,11 @@
 package com.social_network;
 
+import java.io.Serializable;
+
 import com.utils.PrimaryKey;
 
-public class User implements PrimaryKey<Integer> {
+@SuppressWarnings("serial")
+public class User implements PrimaryKey<Integer>, Serializable {
 	@Override
 	public String toString() {
 		return "User Id : " + uId + "\tName : " + name + "\tGender : " + gender;

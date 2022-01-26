@@ -5,6 +5,7 @@ package com.graph;
 
 import static com.utils.CommonUtils.squashArray;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -16,7 +17,8 @@ import com.hashtable.HashSetInterface;
 import com.hashtable.HashSett;
 import com.utils.PrimaryKey;
 
-public class Graph<K extends Comparable<K>, V extends PrimaryKey<K>> implements GraphInterface<K, V> {
+@SuppressWarnings("serial")
+public class Graph<K extends Comparable<K>, V extends PrimaryKey<K>> implements GraphInterface<K, V>, Serializable {
 
 	private HashMapInterface<K, V> vertexlist;
 	private HashMapInterface<K, HashSetInterface<K>> edgeList;

@@ -1,14 +1,16 @@
 package com.hashtable;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 
 import com.linked_list.LinkedListInterface;
 import com.linked_list.LinkedListt;
 
-public class HashMap<T extends Comparable<T>, U> implements HashMapInterface<T, U> {
+@SuppressWarnings("serial")
+public class HashMap<T extends Comparable<T>, U> implements HashMapInterface<T, U>, Serializable {
 
 	// Data Node class
-	private static class Node<T, U> {
+	private static class Node<T, U> implements Serializable {
 		T key;
 		U data;
 

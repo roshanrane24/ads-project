@@ -1,12 +1,14 @@
 package com.hashtable;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import com.linked_list.LinkedListt;
 import com.linked_list.SinglyLinkedListNode;
 
-public class HashSett<T> implements HashSetInterface<T> {
+@SuppressWarnings("serial")
+public class HashSett<T> implements HashSetInterface<T>, Serializable {
 	private ArrayList<LinkedListt<T>> holder;
 	private int fixSize = 15;
 	private int size = 0;
