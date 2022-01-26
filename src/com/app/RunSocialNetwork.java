@@ -1,6 +1,7 @@
 package com.app;
 
 import static com.utils.SocialNetworkUtils.*;
+import static com.utils.IOUtils.*;
 
 import java.util.Scanner;
 
@@ -16,10 +17,18 @@ public class RunSocialNetwork {
 
 		boolean exit = false;
 
+		// set to false if not testing
+		boolean testing = false;
+
 		try (Scanner sc = new Scanner(System.in)) {
 
-			// test graph
-			populateNetwork(network);
+			if (testing) {
+				// test graph
+				populateNetwork(network);
+			} else {
+				network = loadNetwork();
+			}
+			
 
 			while (!exit) {
 				try {
@@ -97,6 +106,8 @@ public class RunSocialNetwork {
 						suggestNewConnections(id, network);
 						break;
 					case 9:
+						saveNetwork(network);
+					case 0:
 						exit = true;
 						break;
 					default: // For Invalid Choice
@@ -124,7 +135,8 @@ public class RunSocialNetwork {
 		System.out.println("6 -> Show Connections of a User");
 		System.out.println("7 -> Show Mutual Connection of Two Users");
 		System.out.println("8 -> Suggest Connection to a User");
-		System.out.println("9 -> Exit");
+		System.out.println("9 -> Save & Exit");
+		System.out.println("0 -> Exit");
 		System.out.print("  -> ");
 
 	}
